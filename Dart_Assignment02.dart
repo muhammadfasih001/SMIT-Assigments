@@ -164,7 +164,7 @@ void main() {
 
   //Q.9: Given a list of integers, write a dart code that returns the maximum value from the list.
 
-  List<int> numbers = [1, 55, 4, 88, 66, 3, 12, 700];
+  List<int> numbers = [1, 55, 4, 88, 1000, 3, 12, 700];
 
   int maximumValue =
       numbers.reduce((value, element) => value > element ? value : element);

@@ -365,7 +365,7 @@ provided.*/
   //Q. 20 Implement a code that finds the maximum and minimum elements in a list using a for loop and if-else condition.
 
   List<int> numbering = [5, 8, 10, 2, 55, 4, 6, 3];
-  int maximum = number[0];
+  int maximum = numbers[0];
   int minimum = numbers[0];
 
   for (int a = 1; a < numbering.length; a++) {

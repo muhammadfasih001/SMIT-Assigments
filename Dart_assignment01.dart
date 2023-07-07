@@ -28,8 +28,8 @@ void main() {
 
   //Q.3: A student will not be allowed to sit in exam if his/her attendance is less than 75%. Create integer variables and assign value: Number of classes held = 16, Number of classes attended = 10, and print percentage of class attended. Is student is allowed to sit in exam or not?
 
-  int numberOfClassesHeld = 20;
-  int numberOfClassesAttended = 18;
+  int numberOfClassesHeld = 16;
+  int numberOfClassesAttended = 12;
 
   double PercentageOfClassAttended =
       (numberOfClassesAttended / numberOfClassesHeld) * 100;
@@ -44,7 +44,7 @@ void main() {
 
   //Q.4: Create integer variable assign any year to it and check if a year is leap year or not. If a year is divisible by 4 then it is leap year but if the year is century year like 2000, 1900, 2100 then it must be divisible by 400. i.e: Use % ( modulus ) operator.
 
-  int year = 2020;
+  int year = 2025;
 
   int leapYear = year % 4;
   int notLeapYear = year % 400;
@@ -77,7 +77,7 @@ void main() {
 
   //Q.6: Write a program to check whether an alphabet is a vowel or consonant.
 
-  String inputAlphabet = 'a';
+  String inputAlphabet = 'fasih';
 
   if (inputAlphabet == 'a' ||
       inputAlphabet == 'e' ||
@@ -237,14 +237,18 @@ void main() {
 
   int number = 55;
 
-  if (number % 2 == 0 && number % 5 == 0) {
-    print("$number is an even number and divisible by 5");
-  } else if (number % 2 == 0) {
-    print("$number is an even number but not divisible by 5");
-  } else if (number % 7 == 0) {
-    print("$number is an odd number and divisible by 7");
+  if (number % 2 == 0) {
+    if (number % 5 == 0) {
+      print("$number is even and divisible by 5");
+    } else {
+      print("$number is even but not divisible by 5");
+    }
   } else {
-    print("$number is an odd number but not divisible by 7");
+    if (number % 7 == 0) {
+      print("$number is Odd divisible by 7");
+    } else {
+      print("$number is Odd but not divisible by 7");
+    }
   }
 
   //Q.10: Write a program that takes three numbers from the user and prints the greatest number & lowest number.

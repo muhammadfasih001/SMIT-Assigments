@@ -270,31 +270,23 @@ void main() {
 
   /*Q 16 Write a program that asks the user for their email and password. If the email and password match a predefined set of credentials, print "User login successful." Otherwise, keep asking for the email and password until the correct credentials are provided.*/
 
-  String email = "muhammadfasih006@gmail.com";
-  String password = "12345";
+  stdout.write("Enter your email: ");
+  String email = stdin.readLineSync()!;
+  stdout.write("Enter your password: ");
+  String password = stdin.readLineSync()!;
+
   bool logIn = false;
 
-  stdout.write("Enter your email: ");
-  String? enterEmail = stdin.readLineSync();
-
-  stdout.write("Enter your password");
-  String? enterPassword = stdin.readLineSync();
-
-  if (enterEmail == email && enterPassword == password) {
-    logIn = true;
-    print("User log in Successful.");
-  }
-
-  while (!logIn) {
-    print("Invalid credential. Please try again.");
-    stdout.write("Enter your email: ");
-    enterEmail = stdin.readLineSync();
-
-    stdout.write("Enter your password");
-    enterPassword = stdin.readLineSync();
-
-    if (enterEmail == email && enterPassword == password) {
+  while (logIn == false) {
+    if (email == "muhammadfasih@gmail.com" && password == "12345") {
       logIn = true;
+      print("Log in successfull");
+    } else {
+      print("Invalid email or password try again.");
+      stdout.write("Enter your email: ");
+      email = stdin.readLineSync()!;
+      stdout.write("Enter your password: ");
+      password = stdin.readLineSync()!;
     }
   }
 
@@ -313,23 +305,24 @@ provided.*/
 
   bool logedIn = false;
 
-  while (!logedIn) {
+  while (logedIn == false) {
     stdout.write("Enter your email: ");
     String? emailEnter = stdin.readLineSync();
 
     stdout.write("Enter your password: ");
     String? passwordEnter = stdin.readLineSync();
 
-    for (var credential in userCredentials) {
-      if (emailEnter == credential["email"] &&
-          passwordEnter == credential["password"]) {
+    for (int a = 0; a < userCredentials.length; a++) {
+      if (emailEnter == userCredentials[a]["email"] &&
+          passwordEnter == userCredentials[a]["password"]) {
         logedIn = true;
-        print("user log in successful.");
+        print("Log in successful");
         break;
       }
     }
-    if (!logedIn) {
-      print("Invalid credential. Please try again.");
+
+    if (logedIn == false) {
+      print("try again");
     }
   }
 

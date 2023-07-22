@@ -7,7 +7,7 @@ void main() {
 
   while (condition == true) {
     print("");
-    print("==========Hospital Management System==========");
+    print("========== Hospital Management System ==========");
     print("");
     print("Press Key 1: Add Patient");
     print("Press Key 2: View Patient Records");
@@ -38,7 +38,7 @@ void main() {
       viewAppointmentRecord();
     } else if (option == 7) {
       condition = false;
-      print("----------Exiting-----------");
+      print("---------- Exiting -----------");
       print(
           "Thank you for using the Hospital Management System. Have a wonderful day!");
     } else {
@@ -56,7 +56,7 @@ addPatient() {
   if (patientExists(id)) {
     print("");
     print(
-        "----------Patient with ID: $id already exists please enter unique ID----------");
+        "---------- Patient with ID: $id already exists please enter unique ID ----------");
     return;
   }
 
@@ -89,7 +89,7 @@ addPatient() {
 
   patientList.add(newPatientMap);
 
-  print("----------Patient added Successfully----------");
+  print("---------- Patient added Successfully ----------");
 }
 
 // Function if patient exists.........
@@ -100,7 +100,7 @@ bool patientExists(int id) {
 //Function patient view records.........
 viewPatientRecords() {
   if (patientList.isEmpty) {
-    print("-----------No Patient Record Found----------");
+    print("----------- No Patient Record Found ----------");
   } else {
     print("Patient Record:");
     for (int i = 0; i < patientList.length; i++) {
@@ -122,9 +122,9 @@ deletePatientByID() {
 
   if (foundPatient) {
     patientList.removeWhere((element) => element["ID"] == id);
-    print("-----------Patient Deleted Successfully------------");
+    print("----------- Patient Deleted Successfully ------------");
   } else {
-    print("------------Patient not found------------");
+    print("------------ Patient not found ------------");
   }
 }
 
@@ -147,7 +147,7 @@ searchPatientById() {
   }
 
   if (foundPatient == null) {
-    print("----------Patient not found----------");
+    print("---------- Patient not found ----------");
   } else {
     print("Patient Matching Succesfully:");
     print(
@@ -198,9 +198,9 @@ addAppointmentSchedule() {
   }
 
   if (patientFound == false) {
-    print("----------Patient not found----------");
+    print("---------- Patient not found ----------");
   } else {
-    print("-----------Appointment add Schedule Successfully----------");
+    print("----------- Appointment add Schedule Successfully ----------");
   }
 }
 
@@ -208,7 +208,7 @@ addAppointmentSchedule() {
 
 viewAppointmentRecord() {
   if (patientList.isEmpty) {
-    print("-----------No Patient Schedule Record found-----------");
+    print("----------- No Patient Schedule Record found -----------");
   } else {
     print("Patient Record:");
     print("");

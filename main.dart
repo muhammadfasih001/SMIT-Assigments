@@ -172,7 +172,8 @@ addAppointmentSchedule() {
 
   for (int i = 0; i < patientList.length; i++) {
     Map<String, dynamic> addAppointment = patientList[i];
-    if (addAppointment["ID"] == id && addAppointment["Name"] == name) {
+    if (addAppointment["ID"] == id &&
+        addAppointment["Name"].toLowerCase() == name.toLowerCase()) {
       stdout.write("Enter Doctor Name: ");
       String docname = stdin.readLineSync()!;
 

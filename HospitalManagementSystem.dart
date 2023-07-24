@@ -68,6 +68,9 @@ addPatient() {
   String name = stdin.readLineSync()!;
   name.toLowerCase();
 
+  stdout.write("Enter your Father Name: ");
+  String fName = stdin.readLineSync()!;
+
   stdout.write("Enter your Age: ");
   int age = int.parse(stdin.readLineSync()!);
 
@@ -85,6 +88,7 @@ addPatient() {
   Map<String, dynamic> newPatientMap = {
     "ID": id,
     "Name": name,
+    "Father Name": fName,
     "Age": age,
     "Gender": gender,
     "Address": address,
@@ -102,8 +106,28 @@ bool patientExists(int id) {
   return patientList.any((element) => element["ID"] == id);
 }
 
-//Function Update Patient Info......
+//Function patient view records.........
+viewPatientRecords() {
+  if (patientList.isEmpty) {
+    print("----------- No Patient Record Found ----------");
+  } else {
+    print("Patient Records:");
 
+    for (int i = 0; i < patientList.length; i++) {
+      Map<String, dynamic> patientRecordExists = patientList[i];
+      print("ID: ${patientRecordExists["ID"]}");
+      print("Name: ${patientRecordExists["Name"]}");
+      print("Father Name: ${patientRecordExists["Father Name"]}");
+      print("Age: ${patientRecordExists["Age"]}");
+      print("Gender: ${patientRecordExists["Gender"]}");
+      print("Address: ${patientRecordExists["Address"]}");
+      print("Contact Number: ${patientRecordExists["Phone Number"]}");
+      print("");
+    }
+  }
+}
+
+//Function Update Patient Info......
 updatePatientInfo() {
   if (patientList.isEmpty) {
     print("---------- No Patient Update Found ----------");
@@ -113,11 +137,11 @@ updatePatientInfo() {
   int idUpdating = int.parse(stdin.readLineSync()!);
 
   Map<String, dynamic>? patientToUpdate;
+
   for (int i = 0; i < patientList.length; i++) {
     Map<String, dynamic> patient = patientList[i];
     if (patient["ID"] == idUpdating) {
       patientToUpdate = patient;
-      // break;
     }
   }
 
@@ -126,6 +150,7 @@ updatePatientInfo() {
   } else {
     print("Current Patient Detail:");
     print("Name: ${patientToUpdate["Name"]}");
+    print("Father Name: ${patientToUpdate["Father Name"]}");
     print("Age: ${patientToUpdate["Age"]}");
     print("Gender: ${patientToUpdate["Gender"]}");
     print("Address: ${patientToUpdate["Address"]}");
@@ -134,6 +159,9 @@ updatePatientInfo() {
 
     stdout.write("Enter Patient Name for Update: ");
     String nameUpdate = stdin.readLineSync()!;
+
+    stdout.write("Enter Patient Father Name for Update: ");
+    String fNameUpdate = stdin.readLineSync()!;
 
     stdout.write("Enter Patient Age for Update: ");
     int ageUpdate = int.parse(stdin.readLineSync()!);
@@ -148,6 +176,7 @@ updatePatientInfo() {
     int phoneUpdate = int.parse(stdin.readLineSync()!);
 
     patientToUpdate["Name"] = nameUpdate;
+    patientToUpdate["Father Name"] = fNameUpdate;
     patientToUpdate["Age"] = ageUpdate;
     patientToUpdate["Gender"] = genderUpdate;
     patientToUpdate["Address"] = addressUpdate;
@@ -157,27 +186,6 @@ updatePatientInfo() {
     print("---------- Patient Details Updated Successfully ----------");
   }
 }
-
-//Function patient view records.........
-viewPatientRecords() {
-  if (patientList.isEmpty) {
-    print("----------- No Patient Record Found ----------");
-  } else {
-    print("Patient Records:");
-
-    for (int i = 0; i < patientList.length; i++) {
-      Map<String, dynamic> patientRecordExists = patientList[i];
-      print("ID: ${patientRecordExists["ID"]}");
-      print("Name: ${patientRecordExists["Name"]}");
-      print("Age: ${patientRecordExists["Age"]}");
-      print("Gender: ${patientRecordExists["Gender"]}");
-      print("Address: ${patientRecordExists["Address"]}");
-      print("Contact Number: ${patientRecordExists["Phone Number"]}");
-      print("");
-    }
-  }
-}
-
 //Function patient delete........
 
 deletePatientByID() {
@@ -219,6 +227,7 @@ searchPatientById() {
     print("Patient Matching Succesfully:");
     print("ID: ${foundPatient["ID"]}");
     print("Name: ${foundPatient["Name"]}");
+    print("Father Name: ${foundPatient["Father Name"]}");
     print("Age: ${foundPatient["Age"]}");
     print("Gender: ${foundPatient["Gender"]}");
     print("Address: ${foundPatient["Address"]}");
@@ -286,6 +295,7 @@ viewAppointmentRecord() {
       Map<String, dynamic> viewAppointment = patientList[i];
       print("ID: ${viewAppointment["ID"]}");
       print("Name: ${viewAppointment["Name"]}");
+      print("Father Name: ${viewAppointment["Father Name"]}");
       print("Age: ${viewAppointment["Age"]}");
       print("Gender: ${viewAppointment["Gender"]}");
       print("Address: ${viewAppointment["Address"]}");

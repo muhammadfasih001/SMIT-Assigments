@@ -9,13 +9,14 @@ void main() {
     print("");
     print("========== Hospital Management System ==========");
     print("");
-    print("Press Key 1: Add Patient");
-    print("Press Key 2: View Patient Records");
-    print("Press Key 3: Delete Patient");
-    print("Press Key 4: Search Patient");
-    print("Press Key 5: Add Patient Appointment Schedule");
-    print("Press Key 6: View Pateint Appointment Schedule record");
-    print("Press Key 7: Exit");
+    print("Press Key 1: Add Patient Details");
+    print("Press Key 2: Update Patient Details");
+    print("Press Key 3: View Patient Records");
+    print("Press Key 4: Delete Patient Details");
+    print("Press Key 5: Search Patient Details");
+    print("Press Key 6: Add Patient Appointment Schedule");
+    print("Press Key 7: View All Patient Appointment Schedule & record");
+    print("Press Key 8: Exit");
 
     print("");
 
@@ -27,22 +28,25 @@ void main() {
     if (option == 1) {
       addPatient();
     } else if (option == 2) {
-      viewPatientRecords();
+      updatePatientInfo();
     } else if (option == 3) {
-      deletePatientByID();
+      viewPatientRecords();
     } else if (option == 4) {
-      searchPatientById();
+      deletePatientByID();
     } else if (option == 5) {
-      addAppointmentSchedule();
+      searchPatientById();
     } else if (option == 6) {
-      viewAppointmentRecord();
+      addAppointmentSchedule();
     } else if (option == 7) {
+      viewAppointmentRecord();
+    } else if (option == 8) {
       condition = false;
       print("---------- Exiting -----------");
       print(
           "Thank you for using the Hospital Management System. Have a wonderful day!");
     } else {
-      print("Invalid option. Please choose a valid option");
+      print(
+          "---------- Invalid option. Please choose a valid option ----------");
     }
   }
 }
@@ -62,6 +66,7 @@ addPatient() {
 
   stdout.write("Enter your Name: ");
   String name = stdin.readLineSync()!;
+  name.toLowerCase();
 
   stdout.write("Enter your Age: ");
   int age = int.parse(stdin.readLineSync()!);
@@ -97,16 +102,78 @@ bool patientExists(int id) {
   return patientList.any((element) => element["ID"] == id);
 }
 
+//Function Update Patient Info......
+
+updatePatientInfo() {
+  if (patientList.isEmpty) {
+    print("---------- No Patient Update Found ----------");
+  }
+
+  stdout.write("Enter the Patient ID you want to Update: ");
+  int idUpdating = int.parse(stdin.readLineSync()!);
+
+  Map<String, dynamic>? patientToUpdate;
+  for (int i = 0; i < patientList.length; i++) {
+    Map<String, dynamic> patient = patientList[i];
+    if (patient["ID"] == idUpdating) {
+      patientToUpdate = patient;
+      // break;
+    }
+  }
+
+  if (patientToUpdate == null) {
+    print("---------- Patient with ID: $idUpdating Not Found ----------");
+  } else {
+    print("Current Patient Detail:");
+    print("Name: ${patientToUpdate["Name"]}");
+    print("Age: ${patientToUpdate["Age"]}");
+    print("Gender: ${patientToUpdate["Gender"]}");
+    print("Address: ${patientToUpdate["Address"]}");
+    print("Contact Number: ${patientToUpdate["Phone Number"]}");
+    print("");
+
+    stdout.write("Enter Patient Name for Update: ");
+    String nameUpdate = stdin.readLineSync()!;
+
+    stdout.write("Enter Patient Age for Update: ");
+    int ageUpdate = int.parse(stdin.readLineSync()!);
+
+    stdout.write("Enter Patient Gender for Update: ");
+    String genderUpdate = stdin.readLineSync()!;
+
+    stdout.write("Enter Patient Address for Update: ");
+    String addressUpdate = stdin.readLineSync()!;
+
+    stdout.write("Enter Contact Number for Update: ");
+    int phoneUpdate = int.parse(stdin.readLineSync()!);
+
+    patientToUpdate["Name"] = nameUpdate;
+    patientToUpdate["Age"] = ageUpdate;
+    patientToUpdate["Gender"] = genderUpdate;
+    patientToUpdate["Address"] = addressUpdate;
+    patientToUpdate["Phone Number"] = phoneUpdate;
+
+    print("");
+    print("---------- Patient Details Updated Successfully ----------");
+  }
+}
+
 //Function patient view records.........
 viewPatientRecords() {
   if (patientList.isEmpty) {
     print("----------- No Patient Record Found ----------");
   } else {
-    print("Patient Record:");
+    print("Patient Records:");
+
     for (int i = 0; i < patientList.length; i++) {
       Map<String, dynamic> patientRecordExists = patientList[i];
-      print(
-          "ID: ${patientRecordExists["ID"]}, Name: ${patientRecordExists["Name"]}, Age: ${patientRecordExists["Age"]}, Gender: ${patientRecordExists["Gender"]}, Address: ${patientRecordExists["Address"]}, Contact Number: ${patientRecordExists["Phone Number"]}");
+      print("ID: ${patientRecordExists["ID"]}");
+      print("Name: ${patientRecordExists["Name"]}");
+      print("Age: ${patientRecordExists["Age"]}");
+      print("Gender: ${patientRecordExists["Gender"]}");
+      print("Address: ${patientRecordExists["Address"]}");
+      print("Contact Number: ${patientRecordExists["Phone Number"]}");
+      print("");
     }
   }
 }
@@ -124,7 +191,7 @@ deletePatientByID() {
     patientList.removeWhere((element) => element["ID"] == id);
     print("----------- Patient Deleted Successfully ------------");
   } else {
-    print("------------ Patient not found ------------");
+    print("------------ Patient with $id not found ------------");
   }
 }
 
@@ -150,8 +217,12 @@ searchPatientById() {
     print("---------- Patient not found ----------");
   } else {
     print("Patient Matching Succesfully:");
-    print(
-        "ID: ${foundPatient["ID"]}, Name: ${foundPatient["Name"]}, Age: ${foundPatient["Age"]}, Gender: ${foundPatient["Gender"]}, Address: ${foundPatient["Address"]}, Contact Number: ${foundPatient["Phone Number"]}");
+    print("ID: ${foundPatient["ID"]}");
+    print("Name: ${foundPatient["Name"]}");
+    print("Age: ${foundPatient["Age"]}");
+    print("Gender: ${foundPatient["Gender"]}");
+    print("Address: ${foundPatient["Address"]}");
+    print("Contact Number: ${foundPatient["Phone Number"]}");
   }
 }
 
@@ -159,7 +230,7 @@ searchPatientById() {
 
 addAppointmentSchedule() {
   if (patientList.isEmpty) {
-    print("No patients found. Please add patient first.");
+    print("No patients found. Please add Patient first.");
   }
 
   stdout.write("Enter add Patient ID: ");
@@ -211,23 +282,32 @@ viewAppointmentRecord() {
     print("----------- No Patient Schedule Record found -----------");
   } else {
     print("Patient Record:");
-    print("");
     for (int i = 0; i < patientList.length; i++) {
       Map<String, dynamic> viewAppointment = patientList[i];
-      print(
-          "ID: ${viewAppointment["ID"]}, Name: ${viewAppointment["Name"]}, Age: ${viewAppointment["Age"]}, Gender: ${viewAppointment["Gender"]}, Address: ${viewAppointment["Address"]}, Contact Number: ${viewAppointment["Phone Number"]}");
+      print("ID: ${viewAppointment["ID"]}");
+      print("Name: ${viewAppointment["Name"]}");
+      print("Age: ${viewAppointment["Age"]}");
+      print("Gender: ${viewAppointment["Gender"]}");
+      print("Address: ${viewAppointment["Address"]}");
+      print("Contact Number: ${viewAppointment["Phone Number"]}");
+      print("");
+
       List<dynamic> appointmentSchedule =
           viewAppointment["AppointmentSchedule"];
       if (appointmentSchedule.isNotEmpty) {
-        print("Appointment Schedule Record:");
+        print("----------- Appointment Schedule Record ----------");
         for (int j = 0; j < appointmentSchedule.length; j++) {
           Map<String, dynamic> appointment = appointmentSchedule[j];
-          print(
-              "Doctor Name: ${appointment["Doctor Name"]}, Appointment Day: ${appointment["Appointment Day"]}, Appointment Time: ${appointment["Appointment Time"]}, Appointment Date: ${appointment["Appointment Date"]}");
+          print("Doctor Name: ${appointment["Doctor Name"]}");
+          print("Appointment Day: ${appointment["Appointment Day"]}");
+          print("Appointment Time: ${appointment["Appointment Time"]}");
+          print("Appointment Date: ${appointment["Appointment Date"]}");
+
           print("");
         }
       } else {
-        print("No Appointment Schedule For this Patient:");
+        print(
+            "------------ No Appointment Schedule For this Patient -----------");
         print("");
       }
     }

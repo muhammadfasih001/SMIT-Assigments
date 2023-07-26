@@ -263,7 +263,7 @@ void main() {
 
   Map<String, dynamic> person = {"name": "fasih", "age": 20, "isStudent": true};
 
-  if (person["isStudent"] == true && person["age"] > 18) {
+  if (person["isStudent"] == true && person["age"] >= 18) {
     print("Elgible");
   } else {
     print("Not eligible");

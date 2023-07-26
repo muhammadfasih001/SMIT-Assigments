@@ -254,7 +254,7 @@ void main() {
 
   List<int> originalsList = [2, 3, 4, 5, 6, 7, 8];
 
-  List<int> squaredList = originalsList.map((e) => e * 2).toList();
+  List<int> squaredList = originalsList.map((e) => e * e).toList();
 
   print("Original List: $originalsList");
   print("Squared List: $squaredList");
